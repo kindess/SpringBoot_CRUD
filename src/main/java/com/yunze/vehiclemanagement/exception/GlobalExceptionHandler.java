@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author pengbinbin
  * @date 2019/6/27
  */
-@ControllerAdvice
+//@ControllerAdvice
 public class GlobalExceptionHandler {
 
     /**

@@ -54,13 +54,14 @@
     select
     <include refid="Base_Column_List" />
     from vehicle_info_tb
-    where
-    <if test="vehicleBrandId != null and vehicleBrandId !='' and vehicleBrandId != -1">
+    <trim prefix="where">
+      <if test="vehicleBrandId != null and vehicleBrandId !='' and vehicleBrandId != -1">
         vehicle_brand_id = #{vehicleBrandId}
-    </if>
-    <if test="vehicleLicense != null and vehicleLicense !=''">
-      vehicle_license like CONCAT("%",#{vehicleLicense},"%")
-    </if>
+      </if>
+      <if test="vehicleLicense != null and vehicleLicense !=''">
+        vehicle_license like CONCAT("%",#{vehicleLicense},"%")
+      </if>
+    </trim>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from vehicle_info_tb

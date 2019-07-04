@@ -7,6 +7,8 @@ import com.yunze.vehiclemanagement.service.UserService;
 import com.yunze.vehiclemanagement.util.ResultCode;
 import com.yunze.vehiclemanagement.util.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -27,6 +29,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
+    @Cacheable(value = "cache",key="'user_'+user.id")
     public User queryUserByIdOrUsername(User user){
         User result = null;
         if (user != null){
@@ -67,6 +70,7 @@ public class UserServiceImpl implements UserService {
      * @throws CustomException
      */
     @Override
+    @CachePut(value = "cache",key="'user_'+user.id")
     public ResultCode<String> register(User user) throws CustomException {
         //生成随机id
         user.setId(UUIDUtils.generateUUID22());
