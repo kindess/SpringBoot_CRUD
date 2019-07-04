@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunze.vehiclemanagement.mapper.OptionFieldMapper">
+  <resultMap id="BaseResultMap" type="com.yunze.vehiclemanagement.pojo.OptionField">
+    <id column="field_id" jdbcType="INTEGER" property="fieldId" />
+    <result column="field_name" jdbcType="VARCHAR" property="fieldName" />
+    <result column="option_id" jdbcType="INTEGER" property="optionId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    field_id, field_name, option_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from option_field_tb
+    where field_id = #{fieldId,jdbcType=INTEGER}
+  </select>
+  <select id="selectFieldsByOptionId" parameterType="java.lang.Integer"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from option_field_tb
+    where option_id = #{optin_id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllFields" resultType="java.util.HashMap">
+    select
+    <include refid="Base_Column_List" />
+    from option_field_tb
+  </select>
+  <select id="selectFieldIdByFieldNameAndOptionId" resultType="java.lang.Integer">
+    select
+    field_id
+    from option_field_tb
+    where optin_id = #{optinId,jdbcType=INTEGER} and field_name = #{fieldName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from option_field_tb
+    where field_id = #{fieldId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yunze.vehiclemanagement.pojo.OptionField">
+    insert into option_field_tb (field_id, field_name, option_id)
+    values (#{fieldId,jdbcType=INTEGER}, #{fieldName,jdbcType=VARCHAR}, #{optionId,jdbcType=INTEGER})
+  </insert>
+  <!--<select id="countByExample" parameterType="com.yunze.vehiclemanagement.pojo.OptionFieldExample" resultType="java.lang.Long">-->
+    <!--select count(*) from option_field_tb-->
+    <!--<if test="_parameter != null">-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <update id="updateByPrimaryKey" parameterType="com.yunze.vehiclemanagement.pojo.OptionField">
+    update option_field_tb
+    set field_name = #{fieldName,jdbcType=VARCHAR},
+      option_id = #{optionId,jdbcType=INTEGER}
+    where field_id = #{fieldId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunze.vehiclemanagement.mapper.VehicleInfoMapper">
+  <resultMap id="BaseResultMap" type="com.yunze.vehiclemanagement.pojo.VehicleInfo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="vehicle_license" jdbcType="VARCHAR" property="vehicleLicense" />
+    <result column="owener" jdbcType="VARCHAR" property="owener" />
+    <result column="option_color_id" jdbcType="INTEGER" property="optionColorId" />
+    <result column="engine_number" jdbcType="VARCHAR" property="engineNumber" />
+    <result column="vehicle_brand_id" jdbcType="INTEGER" property="vehicleBrandId" />
+    <result column="vehicle_rack_number" jdbcType="VARCHAR" property="vehicleRackNumber" />
+    <result column="vehicle_model" jdbcType="VARCHAR" property="vehicleModel" />
+    <result column="register_date" jdbcType="VARCHAR" property="registerDate" />
+    <result column="vehicle_type_id" jdbcType="INTEGER" property="vehicleTypeId" />
+    <result column="date_initial_registration" jdbcType="VARCHAR" property="dateInitialRegistration" />
+    <result column="body_color" jdbcType="VARCHAR" property="bodyColor" />
+    <result column="vehicle_maintenance_status_id" jdbcType="INTEGER" property="vehicleMaintenanceStatusId" />
+    <result column="seating_capacity" jdbcType="INTEGER" property="seatingCapacity" />
+    <result column="annual_review_status_id" jdbcType="INTEGER" property="annualReviewStatusId" />
+    <result column="fuel_type_id" jdbcType="INTEGER" property="fuelTypeId" />
+    <result column="next_annual_inspection_time" jdbcType="VARCHAR" property="nextAnnualInspectionTime" />
+    <result column="displacement" jdbcType="INTEGER" property="displacement" />
+    <result column="level_id" jdbcType="INTEGER" property="levelId" />
+    <result column="business_purpose_id" jdbcType="INTEGER" property="businessPurposeId" />
+    <result column="scope_of_business_id" jdbcType="INTEGER" property="scopeOfBusinessId" />
+    <result column="subordinate_suppliers_id" jdbcType="INTEGER" property="subordinateSuppliersId" />
+    <result column="seats_of_guests" jdbcType="INTEGER" property="seatsOfGuests" />
+    <result column="mileage" jdbcType="INTEGER" property="mileage" />
+    <result column="driving_license_number" jdbcType="VARCHAR" property="drivingLicenseNumber" />
+    <result column="dispatching_right_id" jdbcType="INTEGER" property="dispatchingRightId" />
+    <result column="remarks" jdbcType="LONGVARCHAR" property="remarks" />
+    <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, vehicle_license, owener, option_color_id, engine_number, vehicle_brand_id, vehicle_rack_number, 
+    vehicle_model, register_date, vehicle_type_id, date_initial_registration, body_color, 
+    vehicle_maintenance_status_id, seating_capacity, annual_review_status_id, fuel_type_id, 
+    next_annual_inspection_time, displacement, level_id, business_purpose_id, scope_of_business_id, 
+    subordinate_suppliers_id, seats_of_guests, mileage, driving_license_number, dispatching_right_id, remarks, image_url
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from vehicle_info_tb
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectRecordByPage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from vehicle_info_tb
+  </select>
+  <!-- 单一条件查询 -->
+  <select id="selectByCondition" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from vehicle_info_tb
+    where
+    <if test="vehicleBrandId != null and vehicleBrandId !='' and vehicleBrandId != -1">
+        vehicle_brand_id = #{vehicleBrandId}
+    </if>
+    <if test="vehicleLicense != null and vehicleLicense !=''">
+      vehicle_license like CONCAT("%",#{vehicleLicense},"%")
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from vehicle_info_tb
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.yunze.vehiclemanagement.pojo.VehicleInfo">
+    insert into vehicle_info_tb (id, vehicle_license, owener,
+      option_color_id, engine_number, vehicle_brand_id, 
+      vehicle_rack_number, vehicle_model, register_date, 
+      vehicle_type_id, date_initial_registration, 
+      body_color, vehicle_maintenance_status_id, 
+      seating_capacity, annual_review_status_id, 
+      fuel_type_id, next_annual_inspection_time, displacement, 
+      level_id, business_purpose_id, scope_of_business_id, 
+      subordinate_suppliers_id, seats_of_guests, 
+      mileage, driving_license_number, dispatching_right_id, 
+      remarks)
+    values (#{id,jdbcType=VARCHAR}, #{vehicleLicense,jdbcType=VARCHAR}, #{owener,jdbcType=VARCHAR}, 
+      #{optionColorId,jdbcType=INTEGER}, #{engineNumber,jdbcType=VARCHAR}, #{vehicleBrandId,jdbcType=INTEGER}, 
+      #{vehicleRackNumber,jdbcType=VARCHAR}, #{vehicleModel,jdbcType=VARCHAR}, #{registerDate,jdbcType=VARCHAR}, 
+      #{vehicleTypeId,jdbcType=INTEGER}, #{dateInitialRegistration,jdbcType=VARCHAR}, 
+      #{bodyColor,jdbcType=VARCHAR}, #{vehicleMaintenanceStatusId,jdbcType=INTEGER}, 
+      #{seatingCapacity,jdbcType=INTEGER}, #{annualReviewStatusId,jdbcType=INTEGER}, 
+      #{fuelTypeId,jdbcType=INTEGER}, #{nextAnnualInspectionTime,jdbcType=VARCHAR}, #{displacement,jdbcType=INTEGER}, 
+      #{levelId,jdbcType=INTEGER}, #{businessPurposeId,jdbcType=INTEGER}, #{scopeOfBusinessId,jdbcType=INTEGER}, 
+      #{subordinateSuppliersId,jdbcType=INTEGER}, #{seatsOfGuests,jdbcType=INTEGER}, 
+      #{mileage,jdbcType=INTEGER}, #{drivingLicenseNumber,jdbcType=VARCHAR}, #{dispatchingRightId,jdbcType=INTEGER}, 
+      #{remarks,jdbcType=LONGVARCHAR})
+  </insert>
+  <!--<select id="countByExample" parameterType="com.yunze.vehiclemanagement.pojo.VehicleInfoExample" resultType="java.lang.Long">-->
+    <!--select count(*) from vehicle_info_tb-->
+    <!--<if test="_parameter != null">-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <update id="updateByPrimaryKey" parameterType="com.yunze.vehiclemanagement.pojo.VehicleInfo">
+    update vehicle_info_tb
+    set
+      vehicle_license = #{vehicleLicense,jdbcType=VARCHAR},
+      owener = #{owener,jdbcType=VARCHAR},
+      option_color_id = #{optionColorId,jdbcType=INTEGER},
+      engine_number = #{engineNumber,jdbcType=VARCHAR},
+      vehicle_brand_id = #{vehicleBrandId,jdbcType=INTEGER},
+      vehicle_rack_number = #{vehicleRackNumber,jdbcType=VARCHAR},
+      vehicle_model = #{vehicleModel,jdbcType=VARCHAR},
+      register_date = #{registerDate,jdbcType=VARCHAR},
+      vehicle_type_id = #{vehicleTypeId,jdbcType=INTEGER},
+      date_initial_registration = #{dateInitialRegistration,jdbcType=VARCHAR},
+      body_color = #{bodyColor,jdbcType=VARCHAR},
+      vehicle_maintenance_status_id = #{vehicleMaintenanceStatusId,jdbcType=INTEGER},
+      seating_capacity = #{seatingCapacity,jdbcType=INTEGER},
+      annual_review_status_id = #{annualReviewStatusId,jdbcType=INTEGER},
+      fuel_type_id = #{fuelTypeId,jdbcType=INTEGER},
+      next_annual_inspection_time = #{nextAnnualInspectionTime,jdbcType=VARCHAR},
+      displacement = #{displacement,jdbcType=INTEGER},
+      level_id = #{levelId,jdbcType=INTEGER},
+      business_purpose_id = #{businessPurposeId,jdbcType=INTEGER},
+      scope_of_business_id = #{scopeOfBusinessId,jdbcType=INTEGER},
+      subordinate_suppliers_id = #{subordinateSuppliersId,jdbcType=INTEGER},
+      seats_of_guests = #{seatsOfGuests,jdbcType=INTEGER},
+      mileage = #{mileage,jdbcType=INTEGER},
+      driving_license_number = #{drivingLicenseNumber,jdbcType=VARCHAR},
+      dispatching_right_id = #{dispatchingRightId,jdbcType=INTEGER},
+      remarks = #{remarks,jdbcType=LONGVARCHAR},
+      image_url = #{imageUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
