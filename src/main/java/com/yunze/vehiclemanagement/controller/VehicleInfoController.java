@@ -112,7 +112,10 @@ public class VehicleInfoController {
     @ResponseBody
     @RequestMapping(value = "/vehicleId/{vehicleId}",method = RequestMethod.DELETE)
     public ResultCode deleteVehicleInfoById(@PathVariable("vehicleId")String vehicleId){
-        return vehicleInfoService.deleteByPrimaryKey(vehicleId);
+        if (vehicleId !=null){
+            return ResultCode.success(vehicleInfoService.deleteByPrimaryKey(vehicleId));
+        }
+        return ResultCode.failing();
     }
 
     /**

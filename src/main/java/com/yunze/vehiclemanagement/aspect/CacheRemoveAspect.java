@@ -55,13 +55,14 @@ public class CacheRemoveAspect {
         //方法上是否存在此注解
         if (cacheRemove != null) {
             //清除当前类的缓存
-            cleanRedisCache("*" + target.getClass().toString() + "*");
+//            cleanRedisCache("*" + target.getClass().toString() + "*");
 
-            String value = cacheRemove.value();
+            //清除当前类的缓存（清除指定缓存名的下的所有缓存）
+           /* String value = cacheRemove.value();
             if (!value.equals("")) {
                 //缓存的项目所有redis业务部缓存
                 cleanRedisCache("*" + value + "*");
-            }
+            }*/
             //需要移除的正则key
             String[] keys = cacheRemove.key();
             for (String key : keys) {

@@ -8,7 +8,7 @@ import com.yunze.vehiclemanagement.vo.VehicleInfoVO;
 import java.util.List;
 
 public interface VehicleInfoService {
-    ResultCode deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(String id);
 
     ResultCode deleteByPrimaryKeys(String[] ids);
 

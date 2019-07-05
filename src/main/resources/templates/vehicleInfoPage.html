@@ -10,8 +10,8 @@
 <!-- 自定义样式 -->
 <link type="text/css" rel="stylesheet" href="/public/css/vehicleInfo.css">
 <script type="text/javascript" src="/public/js/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="/layui/layui.all.js"></script>
 <script type="text/javascript" src="/layui/layui.js"></script>
+
 <!-- 自定义js -->
 <script type="text/javascript" th:src="@{/public/js/vehicleInfo.js}"></script>
 <body>
@@ -73,7 +73,7 @@
     <!-- 注册模态框 -->
     <div id="addmain" class="add-main edit-main"  style="display:none;/**需要设置为不显示**/">
         <div class="clearfix wrapper">
-            <form class="layui-form" lay-filter="addForm">
+            <div class="layui-form" lay-filter="addForm">
                 <!-- 左侧 -->
                 <div class="lable-left" style="width: 65%;float: left">
                     <div class="layui-form-item layui-input-inline" style="display: none">
@@ -266,7 +266,7 @@
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
             <!-- 右侧 -->
             <div class="lable-right" style="width: 30%;float: right">
                 <!-- 上传图片 -->
