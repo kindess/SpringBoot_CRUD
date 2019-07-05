@@ -17,6 +17,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,25 +40,24 @@ public class VehicleInfoServiceImpl implements VehicleInfoService {
      * @return
      */
     @Override
-    @CacheRemove(value = "cache",key="vehicle_page_") //清除所有分页数据
     @CacheEvict(value = "cache",key="'vehicle_'+#id")//清除此条数据
-    public ResultCode deleteByPrimaryKey(String id) {
+    public int deleteByPrimaryKey(String id) {
+        int result = 0;
         if (id != null){
-            int result  = vehicleInfoMapper.deleteByPrimaryKey(id);
-            if (result != 0){
-                return ResultCode.success(null);
-            }
+            result  = vehicleInfoMapper.deleteByPrimaryKey(id);
         }
-        return ResultCode.failing();
+        return result;
     }
 
     @Override
+    @Transactional
+    @CacheRemove(value = "cache",key = "vehicle_page_")  //移除分页缓存
     public ResultCode deleteByPrimaryKeys(String[] ids) {
         int result = 0;
         if (ids != null){
             for (String id : ids){
                if (id != null && !id.trim().equals("")){
-                   result = vehicleInfoMapper.deleteByPrimaryKey(id);
+                   result = deleteByPrimaryKey(id);
                }
             }
             if (result != 0){
@@ -70,6 +70,7 @@ public class VehicleInfoServiceImpl implements VehicleInfoService {
 
     @Override
     @CachePut(value = "cache",key = "'vehicle_'+#record.id")  //每调用一次，缓存一次
+    @CacheRemove(value = "cache",key = "vehicle_page_")  //移除分页缓存
     public VehicleInfoVO insert(VehicleInfoVO record) {
         if (record != null){
             record.setId(UUIDUtils.generateUUID22());
@@ -101,7 +102,7 @@ public class VehicleInfoServiceImpl implements VehicleInfoService {
      * 将返回值作为value，更新"cache"缓存中以此"vehicle_id"作为key的键值对
      */
     @CachePut(value = "cache",key="'vehicle_'+#record.id") //更新此条数据
-    @CacheRemove(value ="cache",key = "'vehicle_page_'")  //移除所有分页数据
+    @CacheRemove(value ="cache",key = "vehicle_page_")  //移除所有分页数据
     @Override
     public VehicleInfo updateByPrimaryKey(VehicleInfo record) {
         if (record != null){
@@ -227,7 +228,7 @@ public class VehicleInfoServiceImpl implements VehicleInfoService {
     @Override
     @CachePut(value = "cache",key = "'vehicle_'+#vehicleInfo.id")
     // 清除缓存中以"vehicle_page_"为前缀的key
-    @CacheRemove(value = "cache" ,key ="'vehicle_page_'")
+    @CacheRemove(value = "cache" ,key ="vehicle_page_")
     public VehicleInfo editVehicleInfo(VehicleInfo vehicleInfo) {
         if (vehicleInfo != null ){
             int result = vehicleInfoMapper.updateByPrimaryKey(vehicleInfo);
