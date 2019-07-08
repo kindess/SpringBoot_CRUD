@@ -23,12 +23,13 @@ public class CustomWebMvcConfigurer implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
-        // 登出不拦截、静态资源不拦截
-        registry.addInterceptor(loginIntercepter()).addPathPatterns("/user/**")
+        // 登录、登出、注册不拦截、静态资源不拦截
+        registry.addInterceptor(loginIntercepter()).addPathPatterns("/**")
                 .excludePathPatterns("/druid/**")
-//                .excludePathPatterns("/login")
+                .excludePathPatterns("/user/login")
                 .excludePathPatterns("/user/logout","/user/register")
-                .excludePathPatterns("/**/*.css","/**/*.js");
+                .excludePathPatterns("/**/*.css","/**/*.js","/**/*.png",
+                        "/**/*jpg","/**/*.gif","/**/*.jpeg");
         WebMvcConfigurer.super.addInterceptors(registry);
     }
 

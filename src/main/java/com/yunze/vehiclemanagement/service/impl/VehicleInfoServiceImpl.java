@@ -41,6 +41,7 @@ public class VehicleInfoServiceImpl implements VehicleInfoService {
      */
     @Override
     @CacheEvict(value = "cache",key="'vehicle_'+#id")//清除此条数据
+    @CacheRemove(value = "cache",key = "vehicle_page_")  //移除分页缓存
     public int deleteByPrimaryKey(String id) {
         int result = 0;
         if (id != null){
@@ -49,7 +50,12 @@ public class VehicleInfoServiceImpl implements VehicleInfoService {
         return result;
     }
 
-    @Override
+    /**
+     * 同一个类中，方法调用有缓存标记的方法会导致缓存注解不起作用
+     * @param record
+     * @return
+     */
+ /*   @Override
     @Transactional
     @CacheRemove(value = "cache",key = "vehicle_page_")  //移除分页缓存
     public ResultCode deleteByPrimaryKeys(String[] ids) {
@@ -65,7 +71,7 @@ public class VehicleInfoServiceImpl implements VehicleInfoService {
             }
         }
         return ResultCode.failing();
-    }
+    }*/
 
 
     @Override

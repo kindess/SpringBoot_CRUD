@@ -78,7 +78,7 @@
       level_id, business_purpose_id, scope_of_business_id, 
       subordinate_suppliers_id, seats_of_guests, 
       mileage, driving_license_number, dispatching_right_id, 
-      remarks)
+      remarks,image_url)
     values (#{id,jdbcType=VARCHAR}, #{vehicleLicense,jdbcType=VARCHAR}, #{owener,jdbcType=VARCHAR}, 
       #{optionColorId,jdbcType=INTEGER}, #{engineNumber,jdbcType=VARCHAR}, #{vehicleBrandId,jdbcType=INTEGER}, 
       #{vehicleRackNumber,jdbcType=VARCHAR}, #{vehicleModel,jdbcType=VARCHAR}, #{registerDate,jdbcType=VARCHAR}, 
@@ -89,7 +89,7 @@
       #{levelId,jdbcType=INTEGER}, #{businessPurposeId,jdbcType=INTEGER}, #{scopeOfBusinessId,jdbcType=INTEGER}, 
       #{subordinateSuppliersId,jdbcType=INTEGER}, #{seatsOfGuests,jdbcType=INTEGER}, 
       #{mileage,jdbcType=INTEGER}, #{drivingLicenseNumber,jdbcType=VARCHAR}, #{dispatchingRightId,jdbcType=INTEGER}, 
-      #{remarks,jdbcType=LONGVARCHAR})
+      #{remarks,jdbcType=LONGVARCHAR},#{imageUrl,jdbcType=VARCHAR})
   </insert>
   <!--<select id="countByExample" parameterType="com.yunze.vehiclemanagement.pojo.VehicleInfoExample" resultType="java.lang.Long">-->
     <!--select count(*) from vehicle_info_tb-->

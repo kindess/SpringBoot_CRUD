@@ -38,7 +38,7 @@ public class LoginController {
     public String login(User user, Model model, HttpServletRequest request,
                         HttpServletResponse response, HttpSession session){
         try {
-//            userService.login(user);
+            userService.login(user);
             // 1、是否勾选了记住我
             String rememberMe = request.getParameter("rememberMe");
             if ("rememberMe".equals(rememberMe)){
@@ -58,7 +58,7 @@ public class LoginController {
             //重定向到映射（相当于地址栏输入url）
             return "redirect:/user/index";
         } catch (CustomException e) {
-            model.addAttribute("resultCode",new ResultCode<>(e.getMessage()));
+            model.addAttribute("resultCode",ResultCode.failing(e.getMessage()));
             //页面转发
             return "login";
         }

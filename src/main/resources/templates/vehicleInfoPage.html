@@ -131,7 +131,7 @@
                     <div class="layui-form-item layui-input-inline">
                         <label class="layui-form-label"><span style="color: #377aff">*</span>注册日期</label>
                         <div class="layui-input-block">
-                            <input class="layui-input clear-input" type="text" name="registerDate"  required lay-verify="required">
+                            <input class="layui-input clear-input" type="text" name="registerDate" placeholder="2019-7-7"  required lay-verify="required|date">
                         </div>
                     </div>
                     <div class="layui-form-item layui-input-inline">
@@ -145,7 +145,7 @@
                     <div class="layui-form-item layui-input-inline">
                         <label class="layui-form-label"><span style="color: #377aff">*</span>初次登记日期</label>
                         <div class="layui-input-block">
-                            <input  class="layui-input clear-input" type="text" name="dateInitialRegistration"  required lay-verify="required">
+                            <input  class="layui-input clear-input" type="text" name="dateInitialRegistration" placeholder="2019-7-7"  required lay-verify="required|date">
                         </div>
                     </div>
                     <div class="layui-form-item layui-input-inline">
@@ -165,7 +165,7 @@
                     <div class="layui-form-item layui-input-inline">
                         <label class="layui-form-label"><span style="color: #377aff">*</span>核定载客位</label>
                         <div class="layui-input-block">
-                            <input class="layui-input clear-input" type="text" name="seatingCapacity" placeholder="包含驾驶员"  required lay-verify="required">
+                            <input class="layui-input clear-input" type="text" name="seatingCapacity" placeholder="包含驾驶员"  required lay-verify="required|number">
                         </div>
                     </div>
                     <div class="layui-form-item layui-input-inline">
@@ -187,13 +187,13 @@
                     <div class="layui-form-item layui-input-inline">
                         <label class="layui-form-label"><span style="color: #377aff">*</span>下次年检时间</label>
                         <div class="layui-input-block">
-                            <input class="layui-input clear-input" type="text" name="nextAnnualInspectionTime" required lay-verify="required" >
+                            <input class="layui-input clear-input" type="text" name="nextAnnualInspectionTime" placeholder="2019-7-7" required lay-verify="required|date" >
                         </div>
                     </div>
                     <div class="layui-form-item layui-input-inline">
                         <label class="layui-form-label"><span style="color: #377aff">*</span>排量</label>
                         <div class="layui-input-block">
-                            <input class="layui-input clear-input" type="text" name="displacement" required lay-verify="required">
+                            <input class="layui-input clear-input" type="text" name="displacement" required lay-verify="required|number">
                         </div>
                     </div>
                     <div class="layui-form-item layui-input-inline">
@@ -231,13 +231,13 @@
                     <div class="layui-form-item layui-input-inline">
                         <label class="layui-form-label"><span style="color: #377aff">*</span>载客数</label>
                         <div class="layui-input-block">
-                            <input class="layui-input clear-input" type="text" name="seatsOfGuests" placeholder="不包含驾驶员" required lay-verify="required">
+                            <input class="layui-input clear-input" type="text" name="seatsOfGuests" placeholder="不包含驾驶员" required lay-verify="required|number">
                         </div>
                     </div>
                     <div class="layui-form-item layui-input-inline">
                         <label class="layui-form-label"><span style="color: #377aff">*</span>里程数</label>
                         <div class="layui-input-block">
-                            <input class="layui-input clear-input" type="text" name="mileage" required lay-verify="required">
+                            <input class="layui-input clear-input" type="text" name="mileage" required lay-verify="required|number">
                         </div>
                     </div>
                     <div class="layui-form-item layui-input-inline">
@@ -258,7 +258,7 @@
                         </div>
                     </div>
                     <!-- 图片地址 -->
-                    <input type="hidden" name="imageUrl" id="imageUrl">
+                    <input type="hidden" name="imageUrl" id="imageUrl" class="clear-input">
                     <div class="layui-form-item ">
                         <div class="layui-input-block">
                             <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
