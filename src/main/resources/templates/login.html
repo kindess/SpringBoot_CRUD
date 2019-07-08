@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="/layui/css/layui.mobile.css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="/layui/layui.all.js"></script>
-<script src="/layui/layui.js"></script>
 <style>
     <!-- 自定义样式 -->
 
@@ -45,11 +44,11 @@
            </form>
        </div>
    </div>
-   <script th:inline="javascript">
-       var resultCode = [[${resultCode}]];
-       if (resultCode != undefined && resultCode.msg != undefined){
-           layer.msg(resultCode.msg);
-       }
-   </script>
+   <!--<script th:inline="javascript">-->
+       <!--var resultCode = [[${resultCode}]];-->
+       <!--if (resultCode != undefined && resultCode.msg != undefined){-->
+           <!--layer.msg(resultCode.msg);-->
+       <!--}-->
+   <!--</script>-->
 </body>
 </html>
