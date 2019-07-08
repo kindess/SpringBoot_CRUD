@@ -70,14 +70,14 @@ public class VehicleInfoController {
      * @param vehicleId
      * @return
      */
-    @ResponseBody
+   /* @ResponseBody
     @RequestMapping(value = "/vehicleId/{vehicleId}",method = RequestMethod.GET)
     public ResultCode queryVehicleInfoById(@PathVariable("vehicleId") String vehicleId){
         if (vehicleId != null){
            return ResultCode.success(vehicleInfoService.selectByPrimaryKey(vehicleId));
         }
         return ResultCode.failing();
-    }
+    }*/
 
     /**
      * 请求被修改车辆原数据信息
@@ -85,7 +85,7 @@ public class VehicleInfoController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/vehicleId/{vehicleId}",method = RequestMethod.POST)
+    @RequestMapping(value = "/vehicleId/{vehicleId}",method = RequestMethod.GET)
     public ResultCode oldData(@PathVariable("vehicleId")String vehicleId){
         return vehicleInfoService.selectOldDataByVehicleId(vehicleId);
     }
@@ -126,7 +126,18 @@ public class VehicleInfoController {
     @ResponseBody
     @RequestMapping(value = "/deleteVehicleInfo",method = RequestMethod.POST)
     public ResultCode deleteVehicleInfosByIds(String[] vehicleIds){
-        return vehicleInfoService.deleteByPrimaryKeys(vehicleIds);
+        int result = 0;
+        if (vehicleIds != null){
+            for (String id : vehicleIds){
+                if (id != null && !id.trim().equals("")){
+                    result = vehicleInfoService.deleteByPrimaryKey(id);
+                }
+            }
+            if (result != 0){
+                return ResultCode.success(null);
+            }
+        }
+        return ResultCode.failing();
     }
 
 

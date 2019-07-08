@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    @Cacheable(value = "cache",key="'user_'+user.id")
+    @Cacheable(value = "cache",keyGenerator = "keyGenerator")
     public User queryUserByIdOrUsername(User user){
         User result = null;
         if (user != null){
@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserService {
         }
         return result;
     }
+
 
     /**
      * 登录测试

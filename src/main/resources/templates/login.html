@@ -18,37 +18,38 @@
         <div class="layui-row">
             <form style="margin-top: 100px;" class="layui-col-xs5 layui-col-sm5 layui-col-md5 layui-col-md-offset3" action="/user/login" lay-filter="example"  method="post">
                 <div class="layui-form-item">
-                    <!-- 抛出msg属性在resultCode无法找到的异常 -->
-                    <!--<div class="layui-input-block" style="color: red" th:text="${resultCode.msg}"></div>-->
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-input-block">
-                        <input type="text" name="username" lay-verify="required" lay-reqtext="用户名是必填项，不能为空" autocomplete="off" placeholder="用户名" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-input-block">
-                        <input type="password" name="password" lay-verify="required" lay-reqtext="密码是必填项，不能为空" placeholder="请输入密码" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-input-block">
-                    <input type="checkbox" name="rememberMe" lay-skin="primary"  value="rememberMe" title="记住我" checked>记住我
-                    <a href="/register" style="color: lightseagreen;margin-left: 40px">还没有账号？点击注册</a>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-input-block">
-                        <input type="submit" class="layui-btn" lay-submit="" lay-filter="loginForm"></input>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    <script th:inline="javascript">
-        var resultCode = [[${resultCode}]];
-        if (resultCode != undefined && resultCode.msg != undefined){
-            layer.msg(resultCode.msg);
-        }
-    </script>
+                    <!-- 抛出message属性在resultCode无法找到的异常 -->
+                    <!--<div class="layui-input-block" style="color: red" th:text="${resultCode.message}"></div>-->
+                    <div class="layui-input-block"  style="color: red" th:if="${resultCode != null}" th:text="${resultCode.message}"></div>
+               </div>
+               <div class="layui-form-item">
+                   <div class="layui-input-block">
+                       <input type="text" name="username" lay-verify="required" lay-reqtext="用户名是必填项，不能为空" autocomplete="off" placeholder="用户名" class="layui-input">
+                   </div>
+               </div>
+               <div class="layui-form-item">
+                   <div class="layui-input-block">
+                       <input type="password" name="password" lay-verify="required" lay-reqtext="密码是必填项，不能为空" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                   </div>
+               </div>
+               <div class="layui-input-block">
+                   <input type="checkbox" name="rememberMe" lay-skin="primary"  value="rememberMe" title="记住我" checked>记住我
+                   <a href="/register" style="color: lightseagreen;margin-left: 40px">还没有账号？点击注册</a>
+               </div>
+               <div class="layui-form-item">
+                   <div class="layui-input-block">
+                       <input type="submit" class="layui-btn" lay-submit="" lay-filter="loginForm"></input>
+                       <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                   </div>
+               </div>
+           </form>
+       </div>
+   </div>
+   <script th:inline="javascript">
+       var resultCode = [[${resultCode}]];
+       if (resultCode != undefined && resultCode.msg != undefined){
+           layer.msg(resultCode.msg);
+       }
+   </script>
 </body>
 </html>

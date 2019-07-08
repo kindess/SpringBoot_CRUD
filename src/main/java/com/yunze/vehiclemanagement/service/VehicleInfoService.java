@@ -10,7 +10,7 @@ import java.util.List;
 public interface VehicleInfoService {
     int deleteByPrimaryKey(String id);
 
-    ResultCode deleteByPrimaryKeys(String[] ids);
+//    ResultCode deleteByPrimaryKeys(String[] ids);
 
     VehicleInfoVO insert(VehicleInfoVO record);
 
