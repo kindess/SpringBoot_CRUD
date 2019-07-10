@@ -10,6 +10,8 @@ import com.yunze.vehiclemanagement.util.UploadUtil;
 import com.yunze.vehiclemanagement.vo.VehicleInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +19,15 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * 权限注解@PreAuthorize、@PostAuthorize、@Secured：
+ *      注解@PreAuthorize适合进入方法之前验证授权。 @PreAuthorize可以兼顾，角色/登录用户权限，参数传递给方法等等，并且支持Spring EL表达式。
+ *      注解@PostAuthorize不经常使用，检查授权方法之后才被执行，所以它适合用在对返回的值作验证授权。
+ *      注解@Secured是用来定义业务方法的安全性配置属性列表。您可以使用@Secured在方法上指定安全性要求[角色/权限等]，只有对应角色/权限的用户才可以调用这些方法。
+ *  如果有人试图调用一个方法，但是不拥有所需的角色/权限，那会将会拒绝访问将引发异常。
+ *
+ *  没有标注权限注解的表示没有访问控制。
+ */
 @Controller
 @RequestMapping("/vehicleInfo")
 public class VehicleInfoController {
@@ -84,6 +95,7 @@ public class VehicleInfoController {
      * @param vehicleId
      * @return
      */
+    @PreAuthorize(value = "hasAnyAuthority('updateVehicleInfo','ROLE_ADMIN')")
     @ResponseBody
     @RequestMapping(value = "/vehicleId/{vehicleId}",method = RequestMethod.GET)
     public ResultCode oldData(@PathVariable("vehicleId")String vehicleId){
@@ -95,6 +107,7 @@ public class VehicleInfoController {
      * @param vehicleInfo
      * @return
      */
+    @Secured(value = {"updateVehicleInfo","ROLE_ADMIN"})
     @ResponseBody
     @RequestMapping(value = "/editVehicleInfo",method = RequestMethod.POST)
     public ResultCode editVehicleInfoById(@ModelAttribute("vehicleInfo") VehicleInfo vehicleInfo){
@@ -109,6 +122,7 @@ public class VehicleInfoController {
      * @param vehicleId
      * @return
      */
+    @PreAuthorize("hasAnyAuthority('deleteVehicleInfo','ROLE_ADMIN')")
     @ResponseBody
     @RequestMapping(value = "/vehicleId/{vehicleId}",method = RequestMethod.DELETE)
     public ResultCode deleteVehicleInfoById(@PathVariable("vehicleId")String vehicleId){
@@ -123,6 +137,8 @@ public class VehicleInfoController {
      * @param vehicleIds
      * @return
      */
+    //删除权限和admin角色
+    @PreAuthorize("hasAnyAuthority('deleteVehicleInfo','ROLE_ADMIN')")
     @ResponseBody
     @RequestMapping(value = "/deleteVehicleInfo",method = RequestMethod.POST)
     public ResultCode deleteVehicleInfosByIds(String[] vehicleIds){
@@ -145,6 +161,7 @@ public class VehicleInfoController {
      * 注册
      * @return
      */
+    @PreAuthorize("hasAnyAuthority('insertVehicleInfo')")
     @ResponseBody
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     public ResultCode VehicleInfoRegister(VehicleInfoVO vehicleInfoVO){
@@ -162,6 +179,9 @@ public class VehicleInfoController {
      * 注册页（查询可选选项）
      * @return
      */
+    //具有插入或者更新权限才能调用
+//    @Secured({"insertVehicleInfo","updateVehicleInfo"})  // 不允许访问？
+    @PreAuthorize("hasAnyAuthority('insertVehicleInfo','updateVehicleInfo')")
     @ResponseBody
     @RequestMapping(value = "/registerPage",method = RequestMethod.GET)
     public ResultCode VehicleInfoAddPage(){

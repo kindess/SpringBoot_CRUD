@@ -20,7 +20,7 @@ public class PagesController {
      * 登录页
      * @return
      */
-    @RequestMapping(value = "/user/login",method = RequestMethod.GET)
+    @RequestMapping(value = "/login.html",method = RequestMethod.GET)
     public String login(){
         return "login";
     }

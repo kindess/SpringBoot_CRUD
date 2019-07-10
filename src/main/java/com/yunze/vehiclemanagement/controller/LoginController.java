@@ -73,14 +73,15 @@ public class LoginController {
     @RequestMapping("/logout")
     public String logout(HttpServletResponse response, HttpSession session){
         // 1、清除session用户信息
-        session.removeAttribute("userInfo");
+//        session.removeAttribute("userInfo");
+        session.invalidate();
         // 2、清除cookie
         Cookie rememberMeCookie = new Cookie("rememberMe","");
         rememberMeCookie.setMaxAge(0);
         rememberMeCookie.setPath("/");
         response.addCookie(rememberMeCookie);
         // 3、重定向
-        return "redirect:/user/login";
+        return "redirect:/login.html";
     }
 
     @ResponseBody
