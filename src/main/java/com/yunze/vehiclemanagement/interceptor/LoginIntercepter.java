@@ -30,6 +30,7 @@ public class LoginIntercepter implements HandlerInterceptor {
      */
     @Autowired
     private UserService userService;
+    // 登录表单action路径
     private static final String LOGIN_URL = "/user/login";
 
     @Override
@@ -55,7 +56,7 @@ public class LoginIntercepter implements HandlerInterceptor {
                }
                // 1.1.2 不接受除登录页面外发送的请求（未认证）
                request.setAttribute("resultCode",ResultCode.failing(ErrorMsg.ERROR_100012));
-               request.getRequestDispatcher("/user/login").forward(request,response);
+               request.getRequestDispatcher("/login.html").forward(request,response);
                return false;
            }
            // 1.2 cookie中存在用户信息
@@ -86,7 +87,7 @@ public class LoginIntercepter implements HandlerInterceptor {
             }
             // 2.2 不接受除登录页面外发送的请求（未认证）
             request.setAttribute("resultCode",ResultCode.failing(ErrorMsg.ERROR_100012));
-            request.getRequestDispatcher("/user/login").forward(request,response);
+            request.getRequestDispatcher("/login.html").forward(request,response);
             return false;
         }
     }

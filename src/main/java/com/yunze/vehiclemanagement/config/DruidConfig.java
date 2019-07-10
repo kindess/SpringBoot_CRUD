@@ -17,10 +17,10 @@ import java.util.Map;
 @Configuration
 public class DruidConfig {
 
-    @Value("spring.datasource.StatViewServlet.loginUsername")
+    @Value("${spring.datasource.StatViewServlet.loginUsername}")
     private String loginUsername;
 
-    @Value("spring.datasource.StatViewServlet.loginPassword")
+    @Value("${spring.datasource.StatViewServlet.loginPassword}")
     private String loginPassword;
     /**
      * 数据源

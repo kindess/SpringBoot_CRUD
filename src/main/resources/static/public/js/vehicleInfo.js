@@ -136,6 +136,9 @@ layui.use(['form','table'], function(){
                 // layer.msg('添加');
                 //Ajax获取数据，动态初始化下拉框与单选按钮
                 $.get('/vehicleInfo/registerPage', function(res){
+                    if (res.status == 201){
+                        return layer.msg(res.message);
+                    }
                     var data = res.data[0];
                     /*  $.each(data, function (index1, item1) {
                           $.each(item1,function (index2, item2) {
@@ -175,6 +178,9 @@ layui.use(['form','table'], function(){
                     return layer.msg("请不要选择多条数据！");
                 }
                 $.get("/vehicleInfo/vehicleId/"+data[0].id,function (res) {
+                    if (res.status == 201){
+                        return layer.msg(res.message);
+                    }
                     if (res.status == 200){
                         //原数据
                         var oldData = res.data[0];
@@ -273,6 +279,9 @@ layui.use(['form','table'], function(){
                     "traditional":true, // 提交数组
                     "data":{"vehicleIds":array},
                     "success":function(res){
+                        if (res.status == 201){
+                            return layer.msg(res.message);
+                        }
                         if (res.status == 200){
                             layer.msg("操作成功");
                             // 刷新页面

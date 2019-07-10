@@ -45,9 +45,10 @@
         </javaClientGenerator>
 
 
-        <!-- table指定每个表的生成策略 -->
-        <table tableName="option_tb" domainObjectName="Option"></table>
-        <table tableName="option_field_tb" domainObjectName="OptionField"></table>
-        <table tableName="vehicle_info_tb" domainObjectName="VehicleInfo"></table>
+        <!-- table指定每个表的生成策略  表名：实体类名 -->
+        <table tableName="role_tb" domainObjectName="Role"></table>
+        <table tableName="permit_tb" domainObjectName="Permit"></table>
+        <table tableName="user_role_tb" domainObjectName="UserRole"></table>
+        <table tableName="role_permit_tb" domainObjectName="RolePermit"></table>
     </context>
 </generatorConfiguration>
